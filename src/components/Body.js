@@ -1,15 +1,34 @@
 import ResCard from "./ResCard";
-import resList from "../utils/mockData";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
+import Shimmer from "./Shimmer";
 
 const Body=()=>{
-  const[resList1,setfilterlist]= useState(resList);
+  const[resList1,setfilterlist]= useState([]);
+
+  useEffect(()=>{
+    fetchedData();
+  },[]);
+
+  const fetchedData=async()=>{
+    const data =await fetch(
+      "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65200&lng=77.16630"
+      );
+      const json= await data.json();
+        
+        setfilterlist(
+          json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
+  };
+
+  if(resList1.length===0){
+    return<Shimmer/>;
+  }
+
     return(
       <div className="body">
-          <button className="filter-button" onClick={()=>{
-            const filteredlist=resList.filter((res)=>res.info.avgRating > 4);
+          <button className="filter-button" onClick={() => {
+            const filteredlist=resList1.filter((res)=>res.info.avgRating > 4);
             setfilterlist(filteredlist);
-            console.log(filteredlist);
+           
           }}>
             Top Rated Restaurant
           </button>
