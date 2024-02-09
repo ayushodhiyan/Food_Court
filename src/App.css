@@ -68,6 +68,7 @@ padding-left: 10px;
   
 }
 .filter{
+  margin-left: 15px;
   margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
