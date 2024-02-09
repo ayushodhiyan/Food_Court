@@ -51,9 +51,8 @@ padding-left: 10px;
 }
 
 .filter-button{
-  padding: 10px;
-  margin-top: 15px;
   margin-left: 15px;
+  
 }
 .shimmer-card-container{
   display: flex;
@@ -67,4 +66,13 @@ padding-left: 10px;
   display: flex;
   margin:15px;
   
+}
+.filter{
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-btn{
+  cursor: pointer;
 }
