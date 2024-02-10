@@ -16,6 +16,7 @@ const Body=()=>{
       "https://www.swiggy.com/mapi/homepage/getCards?lat=28.65200&lng=77.16630"
       );
       const json= await data.json();
+      
         
         setfilterlist(
           json?.data?.success?.cards[1]?.gridWidget?.gridElements?.infoWithStyle?.restaurants);
