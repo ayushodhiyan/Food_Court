@@ -1,6 +1,7 @@
 import ResCard from "./ResCard";
 import { useState ,useEffect} from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body=()=>{
   const[resList1,setfilterlist]= useState([]);
@@ -60,7 +61,7 @@ const Body=()=>{
       
         <div className="res-cont">
           {searchedlist.map((rest)=>(
-            <ResCard key={rest.info.id} resdata={rest}/>
+            <Link key={rest.info.id} to={"/restaurants/"+rest.info.id}><ResCard resdata={rest}/></Link>
           ))}
         </div>
       </div>
