@@ -42,6 +42,16 @@ padding-left: 10px;
   box-shadow: 5px 5px 5px 5px  grey;
 }
 
+.about-card{
+  display: flex;
+  flex-wrap: wrap;
+}
+.about-img{
+  width: 200px;
+  height: 200px;
+
+}
+
 
 
 .res-logo{
