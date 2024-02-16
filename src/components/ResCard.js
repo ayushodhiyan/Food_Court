@@ -11,13 +11,13 @@ const ResCard=(props)=>{
 
     }=resdata?.info;
     return(
-      <div className="res-card" style={{backgroundColor: "#f0f0f0"}}>
-        <img className='res-logo' alt="logo" src={CDN_URL+cloudinaryImageId}/>
+      <div className=" p-2 m-2 h-[425px]  w-[200px] bg-slate-200 rounded-lg cursor-pointer hover:shadow-2xl hover:shadow-slate-800" >
+        <img className="h-[175px] w-[210px] rounded-lg" alt="logo" src={CDN_URL+cloudinaryImageId}/>
         
-        <h3>{name}</h3>
-        <h4>{avgRating}</h4>
-        <h4>{costForTwo}</h4>
-        <h4>{cuisines.join(" ,")}</h4>
+        <h3 className="font-bold py-2" >{name}</h3>
+        <h4 className=" py-1" >{avgRating}</h4>
+        <h4 className=" py-1" >{costForTwo}</h4>
+        <h4 className=" py-1" >{cuisines.join(" ,")}</h4>
         
       </div>
     );
