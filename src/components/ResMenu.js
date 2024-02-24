@@ -1,6 +1,7 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useResMenu from "../utils/useResMenu";
+import MenuCatogories from "./MenuCatogories";
 
 
 
@@ -12,16 +13,15 @@ const ResMenu=()=>{
     if(resmenu===null)return <Shimmer/>;
     
     const {name,cuisines,costForTwoMessage,avgRatingString,sla,
-        totalRatingsString,locality,feeDetails,itemAttribute} =
+        totalRatingsString,locality,feeDetails} =
     resmenu?.data?.cards[2]?.card?.card?.info;
     
-    const{itemCards}=
-    resmenu?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
     
 
-    
+    const catogories=resmenu?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((cato)=>
+        cato.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
-    
     return(
         <div className="p-8 pl-28">
             <div className="p-4 border-b border-dashed border-black flex justify-between">
@@ -49,28 +49,12 @@ const ResMenu=()=>{
                      <div className="pl-16">💸{costForTwoMessage}</div>  
                 </div>
                 
-            <div >
-            {itemCards.map((item)=>(
-                <div className="py-10 border-b border-solid border-black flex justify-between" key={item.card.info.id}>
-                    <div>
-                        <div>
-                        {((item.card.info.itemAttribute.vegClassifier)==="VEG")?<h1>🟢</h1>:<h1>🔴</h1>}
-                            
-                        </div>
-                        <div className="font-bold text-lg">{item.card.info.name}</div>
-                        <div className="flex">
-                          <div className="font-bold pr-1">₹{item.card.info.defaultPrice/100||item.card.info.price/100 }</div>
-                          <div className=" text-sm px-2 text-red-700 bg-red-200">{item.card.info.offerTags[0].title} {item.card.info.offerTags[0].subTitle}</div>
-                        </div>
-                        <div>{item.card.info.description}</div>
-                    </div>
-                    <div className=" px-8 " >
-                        <img className=" border border-solid border-black h-[80px] w-[150px] rounded-lg" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/"+item.card.info.imageId}/>
-                        <button className=" p-4 m-2  bg-slate-200">Add+</button>
-                    </div>
-                </div>
-            ))}
+            
             </div>
+            <div >
+            {catogories.map((cat)=>(
+                <MenuCatogories key={cat.card.card.title} items={cat.card.card}/>
+            ))}
             </div>
             
             
@@ -78,9 +62,4 @@ const ResMenu=()=>{
     );
 
   }
-
-
-    
-
-
 export default ResMenu;

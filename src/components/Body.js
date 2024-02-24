@@ -1,4 +1,4 @@
-import ResCard from "./ResCard";
+import ResCard ,{withlabel}from "./ResCard";
 import { useState ,useEffect} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -11,6 +11,8 @@ const Body=()=>{
   useEffect(()=>{
     fetchedData();
   },[]);
+
+  const PromotedRescCard=withlabel(ResCard);
 
   const fetchedData=async()=>{
     const data =await fetch(
@@ -32,7 +34,7 @@ const Body=()=>{
 
     return(
       <div className="body">
-        <div className=" flex justify-between items-center pb-2 pl-4" >
+        <div className=" flex justify-between items-center pb-2 pl-4 " >
           <div className="py-2  ">
             <input type="text" className=" pl-4 border-2" value={searchText}
             onChange={(e)=>{
@@ -65,7 +67,9 @@ const Body=()=>{
       
         <div className="flex flex-wrap pl-16">
           {searchedlist.map((rest)=>(
-            <Link key={rest.info.id} to={"/restaurants/"+rest.info.id}><ResCard resdata={rest}/></Link>
+            <Link key={rest.info.id} to={"/restaurants/"+rest.info.id}>
+              {rest.info.promoted?<PromotedRescCard resdata={rest} />:<ResCard resdata={rest}/>}
+            </Link>
           ))}
         </div>
       </div>
